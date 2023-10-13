@@ -13,7 +13,7 @@ namespace TestingMediatR.Commands.UpdateStudent
             _studentService = studentService;
 
             RuleFor(command => command.Id)
-                .GreaterThan(0).WithMessage("Invalid student ID");
+                .GreaterThan(0).WithMessage("Id Invalide");
 
             RuleFor(command => command.StudentName)
                 .NotEmpty().WithMessage("Emri nuk mund të lihet bosh")
@@ -45,8 +45,8 @@ namespace TestingMediatR.Commands.UpdateStudent
                 .MaximumLength(50).WithMessage("Adresa nuk mund të jetë më e gjatë se 50 karaktere");
 
             RuleFor(x => x.PhoneNumber)
-           .NotEmpty().WithMessage("Phone number is required.")
-           .Matches(@"^\+[1-9]\d{1,14}$").WithMessage("Invalid phone number format.")
+           .NotEmpty().WithMessage("Numri nuk mund te lihet bosh")
+          .Matches(@"^\+[1-9]\d{1,14}$").WithMessage("Numer i pa pershtatshem")
            .CustomAsync(async (phoneNumber, context, cancellationToken) =>
            {
                var studentId = context.InstanceToValidate.Id;

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using ServiceStack.FluentValidation.Attributes;
 using TestingMediatR.Models;
 
 namespace TestingMediatR.Commands.CreateStudent

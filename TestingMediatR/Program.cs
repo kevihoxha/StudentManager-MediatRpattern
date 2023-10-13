@@ -1,19 +1,23 @@
 using FluentValidation;
 using MediatR;
 using System.Reflection;
+using TestingMediatR;
 using TestingMediatR.Data;
 using TestingMediatR.Repositories;
 using TestingMediatR.Services;
+using TestingMediatR.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddDbContext<DbContextClass>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IGradeRepository, GradeRepository>();
+
 builder.Services.AddControllers();
 
 
@@ -33,7 +37,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();
 
 app.Run();

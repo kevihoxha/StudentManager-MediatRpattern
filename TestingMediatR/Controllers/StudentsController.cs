@@ -38,9 +38,11 @@ namespace TestingMediatR.Controllers
             return studentDetails;
         }
         [HttpPost]
-        public async Task<ActionResult> AddStudentAsync(Commands.CreateStudent.Command1 command)
+        public async Task<ActionResult> AddStudentAsync(Commands.CreateStudent.Command1 command , CancellationToken cancellationToken)
         {
-            return await ValidateAndSendCommandAsync(command, _validators.FirstOrDefault());
+            var result = await mediator.Send(command);
+            return Ok(result);
+           /* return await ValidateAndSendCommandAsync(command, _validators.FirstOrDefault());*/
         }
     // MENYRA E PARE 
     /*var validationResult = await _commandValidator.ValidateAsync(command);
@@ -52,9 +54,11 @@ namespace TestingMediatR.Controllers
     return Ok(result);
 }*/
     [HttpPut]
-        public async Task<ActionResult> UpdateStudentAsync(Commands.UpdateStudent.Command command)
+        public async Task<ActionResult> UpdateStudentAsync( Commands.UpdateStudent.Command command,CancellationToken cancellationToken)
         {
-            return await ValidateAndSendCommandAsync(command, _updateStudentCommandValidator);
+            var result = await mediator.Send(command);
+            return Ok(result);
+           /* return await ValidateAndSendCommandAsync(command, _updateStudentCommandValidator);*/
         }
         [HttpDelete("{studentId}")]
         public async Task<ActionResult> DeleteStudentAsync(int studentId)

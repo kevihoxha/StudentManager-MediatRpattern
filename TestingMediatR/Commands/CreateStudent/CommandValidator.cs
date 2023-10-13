@@ -45,8 +45,8 @@ namespace TestingMediatR.Commands.CreateStudent
                 .MaximumLength(100).WithMessage("Andresa nuk mund te jete me e gjate se 50 karaktere");
 
             RuleFor(x => x.phoneNumber)
-          .NotEmpty().WithMessage("Phone number is required.")
-          .Matches(@"^\+[1-9]\d{1,14}$").WithMessage("Invalid phone number format.")
+          .NotEmpty().WithMessage("Numri nuk mund te lihet bosh")
+          .Matches(@"^\+[1-9]\d{1,14}$").WithMessage("Numer i pa pershtatshem")
           .CustomAsync(async (phoneNumber, context, cancellationToken) =>
           {
               var exists = await _studentService.ExistsWithPhoneNumber(phoneNumber, null);
