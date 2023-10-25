@@ -46,7 +46,7 @@ namespace TestingMediatR.Commands.UpdateStudent
 
             RuleFor(x => x.PhoneNumber)
            .NotEmpty().WithMessage("Numri nuk mund te lihet bosh")
-          .Matches(@"^\+[1-9]\d{1,14}$").WithMessage("Numer i pa pershtatshem")
+          .Matches(@"^\+[1-9]\d{9,}$").WithMessage("Numer i pa pershtatshem")
            .CustomAsync(async (phoneNumber, context, cancellationToken) =>
            {
                var studentId = context.InstanceToValidate.Id;

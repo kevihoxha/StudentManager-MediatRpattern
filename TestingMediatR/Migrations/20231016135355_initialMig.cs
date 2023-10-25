@@ -14,14 +14,14 @@ namespace TestingMediatR.Migrations
                 name: "Grades",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    GradeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Grade = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Grades", x => x.Id);
+                    table.PrimaryKey("PK_Grades", x => x.GradeId);
                 });
 
             migrationBuilder.CreateTable(
@@ -33,6 +33,7 @@ namespace TestingMediatR.Migrations
                     StudentEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StudentAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StudentAge = table.Column<int>(type: "int", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SerialNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GradeId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -43,7 +44,7 @@ namespace TestingMediatR.Migrations
                         name: "FK_Students_Grades_Id",
                         column: x => x.Id,
                         principalTable: "Grades",
-                        principalColumn: "Id",
+                        principalColumn: "GradeId",
                         onDelete: ReferentialAction.Cascade);
                 });
         }

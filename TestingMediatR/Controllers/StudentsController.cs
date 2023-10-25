@@ -2,14 +2,16 @@
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using TestingMediatR.Commands;
 using TestingMediatR.Commands.CreateStudent;
 using TestingMediatR.Commands.UpdateStudent;
 using TestingMediatR.Models;
+using TestingMediatR.Queries.GetStudentsPaginated;
 
 namespace TestingMediatR.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class StudentsController : ControllerBase
     {
@@ -26,12 +28,19 @@ namespace TestingMediatR.Controllers
             _updateStudentCommandValidator = updateStudentCommandValidator;
         }
         [HttpGet]
+        [EnableQuery]
         public async Task<IQueryable<StudentDetails>> GetStudentListAsync()
         {
             var studentDetails = await mediator.Send(new Queries.GetStudentListQuery.Query());
             return studentDetails;
         }
-        [HttpGet("studentId")]
+        [HttpGet("page/{pageNumber}")]
+        public async Task<QueryResponse> GetStudentsPaginatedAsync(int pageNumber)
+        {
+            var studentDetails = await mediator.Send(new Queries.GetStudentsPaginated.Query(pageNumber));
+            return studentDetails;
+        }
+        [HttpGet("{studentId}")]
         public async Task<StudentDetails> GetStudentByIdAsync(int studentId)
         {
             var studentDetails = await mediator.Send(new Queries.GetStudentByIdQuery.Query(studentId));

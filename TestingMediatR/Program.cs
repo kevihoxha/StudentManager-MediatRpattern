@@ -1,5 +1,6 @@
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.OData;
 using System.Reflection;
 using TestingMediatR;
 using TestingMediatR.Data;
@@ -18,7 +19,10 @@ builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IGradeRepository, GradeRepository>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddOData
+                                  (options => options.Select()
+                                                     .Filter()
+                                                     .OrderBy());
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

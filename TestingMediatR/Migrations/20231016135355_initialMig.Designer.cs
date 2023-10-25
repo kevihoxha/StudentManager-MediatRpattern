@@ -11,8 +11,8 @@ using TestingMediatR.Data;
 namespace TestingMediatR.Migrations
 {
     [DbContext(typeof(DbContextClass))]
-    [Migration("20231013084235_phoneNumberChanges")]
-    partial class phoneNumberChanges
+    [Migration("20231016135355_initialMig")]
+    partial class initialMig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
