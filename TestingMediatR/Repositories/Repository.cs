@@ -21,7 +21,6 @@ namespace TestingMediatR.Repositories
         {
             return await _dbSet.FindAsync(id);
         }
-
         public IQueryable<TEntity> GetAll()
         {
             return _dbSet.AsQueryable();
@@ -61,7 +60,8 @@ namespace TestingMediatR.Repositories
         }
         public async Task<TEntity> GetStudent(Expression<Func<TEntity, bool>> predicate)
         {
-            return await _dbSet.FindAsync(predicate);
+            var result = await _dbSet.FirstOrDefaultAsync(predicate);
+            return result;
         }
     }
 }

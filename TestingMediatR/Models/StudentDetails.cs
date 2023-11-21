@@ -6,7 +6,7 @@ namespace TestingMediatR.Models
 {
     public class StudentDetails
     {
-        
+
         public int Id { get; set; }
         public string StudentName { get; set; }
         public string StudentEmail { get; set; }
@@ -15,7 +15,10 @@ namespace TestingMediatR.Models
         public string PhoneNumber { get; set; }
         public string SerialNumber { get; set; }
 
-        public int GradeId { get; set; }  
-        public StudentGrade Grade { get; set; }  
+        public int GradeId { get; set; }
+        public StudentGrade Grade { get; set; }
+        public int? RoleId { get; set; }
+
+        public StudentRoles StudentRole { get; set; }
     }
 }

@@ -33,7 +33,8 @@ namespace TestingMediatR.Services
 
         public async Task<StudentDetails> GetStudentByEmailAsync(string email)
         {
-            return await _studentRepository.GetStudent(x => x.StudentEmail == email);
+            var result = await _studentRepository.GetStudent(x => x.StudentEmail == email);
+            return result;
         }
 
         public async Task<StudentDetails> GetStudentByIdAsync(int id)

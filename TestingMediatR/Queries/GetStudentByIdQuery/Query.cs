@@ -3,6 +3,6 @@ using TestingMediatR.Models;
 
 namespace TestingMediatR.Queries.GetStudentByIdQuery
 {
-    public record Query(int Id) : IRequest<StudentDetails>;
+    public record Query(int Id) : IRequest<StudentQueryResponse>;
 
 }
