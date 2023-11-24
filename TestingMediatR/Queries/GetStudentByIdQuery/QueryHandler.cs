@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using TestingMediatR.Models;
 using TestingMediatR.Queries;
 using TestingMediatR.Queries.GetStudentByIdQuery;
@@ -10,24 +11,20 @@ namespace TestingMediatR.Handlers
     public class QueryHandler : IRequestHandler< Queries.GetStudentByIdQuery.Query, StudentQueryResponse> 
     {
         private readonly IStudentService _studentService;
-        public QueryHandler( IStudentRepository studentRepository, IStudentService studentService)
+        private readonly IMapper _mapper;
+        public QueryHandler( IStudentRepository studentRepository, IStudentService studentService, IMapper mapper)
         {
             _studentService = studentService;
+            _mapper = mapper;
 
         }
         public async Task <StudentQueryResponse> Handle(Queries.GetStudentByIdQuery.Query query,CancellationToken cancellationToken)
         {
             var studentDetails = await _studentService.GetStudentByIdAsync(query.Id);
 
-            // Map the necessary properties to the new response class
-            var queryResponse = new StudentQueryResponse
-            {
-                StudentName = studentDetails.StudentName,
-                Grade = studentDetails.Grade.Grade,
-                Description = studentDetails.Grade.Description,
-            };
+           var response = _mapper.Map<StudentQueryResponse>(studentDetails);
 
-            return queryResponse;
+            return response;
         }
     }
 }

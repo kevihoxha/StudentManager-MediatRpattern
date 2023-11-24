@@ -76,7 +76,7 @@ namespace TestingMediatR.Data
         {
             var studentWithDetails = _context.Students
                     .Include(s => s.Grade)
-                    .Include(s => s.StudentRole)
+                    .Include(s => s.StudentRoles)
                     .FirstOrDefault(s => s.Id == 1);
             var students = new List<StudentDetails>
         {

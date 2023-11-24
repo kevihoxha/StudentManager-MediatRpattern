@@ -1,4 +1,5 @@
-﻿using TestingMediatR.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using TestingMediatR.Models;
 using TestingMediatR.Repositories;
 
 namespace TestingMediatR.Services
@@ -39,12 +40,12 @@ namespace TestingMediatR.Services
 
         public async Task<StudentDetails> GetStudentByIdAsync(int id)
         {
-            return await _studentRepository.GetStudentWithGradeAsync(id);
+            return await _studentRepository.GetStudentWithDetailsAsync(id);
         }
 
         public async Task<IQueryable<StudentDetails>> GetStudentListAsync()
         {
-            return  _studentRepository.GetStudentsWithGradesAsync();
+            return  _studentRepository.GetStudentsWithGradesAsync().Include(x=>x.StudentRoles);
         }
         public async Task<bool> UpdateStudentAsync(StudentDetails studentDetails)
         {

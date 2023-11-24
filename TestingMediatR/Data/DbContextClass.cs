@@ -40,7 +40,7 @@ namespace TestingMediatR.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<StudentDetails>()
-                .HasOne(sd => sd.StudentRole)
+                .HasOne(sd => sd.StudentRoles)
                 .WithMany()
                 .HasForeignKey(sd => sd.Id).HasPrincipalKey(c => c.RoleId)
                 .OnDelete(DeleteBehavior.Cascade);

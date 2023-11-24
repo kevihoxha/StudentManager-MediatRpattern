@@ -20,10 +20,11 @@ namespace TestingMediatR.Repositories
         {
             return await _dbContext.Students.CountAsync();
         }
-        public async Task<StudentDetails> GetStudentWithGradeAsync(int studentId)
+        public async Task<StudentDetails> GetStudentWithDetailsAsync(int studentId)
         {
             return await _dbcontext.Students
                 .Include(s => s.Grade) 
+                .Include(s=>s.StudentRoles)
                 .FirstOrDefaultAsync(s => s.Id == studentId);
         }
         public IQueryable<StudentDetails> GetStudentsWithGradesAsync()

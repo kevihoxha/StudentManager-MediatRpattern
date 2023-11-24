@@ -19,6 +19,6 @@ namespace TestingMediatR.Models
         public StudentGrade Grade { get; set; }
         public int? RoleId { get; set; }
 
-        public StudentRoles StudentRole { get; set; }
+        public StudentRoles StudentRoles { get; set; }
     }
 }

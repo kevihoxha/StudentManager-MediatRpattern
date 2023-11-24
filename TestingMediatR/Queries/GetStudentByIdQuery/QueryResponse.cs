@@ -6,6 +6,6 @@ namespace TestingMediatR.Queries.GetStudentByIdQuery
     {
         public string StudentName { get; set; }
         public int Grade { get; set; }
-        public string Description { get; set; }
+        public string RoleName { get; set; }
     }
 }
